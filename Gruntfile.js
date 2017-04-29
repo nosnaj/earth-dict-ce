@@ -20,6 +20,14 @@ grunt.initConfig({
                 livereload: true
             }
         },
+        js : {
+            files: ['src/*.js'],
+            tasks: ['concat'],
+            options: {
+                spawn: true,
+                livereload: true
+            }
+        },
         less: {
             files: ['src/*.less'],
             tasks: ['less'],
@@ -37,6 +45,7 @@ grunt.initConfig({
         },
         dist: {
             src: [
+                'src/functions.js',
                 'src/main.js'
             ],
             dest: 'dist/main.js',

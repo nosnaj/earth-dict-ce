@@ -139,10 +139,29 @@ function watchHighlight () {
 
   $('body').on('click' , '.hightlight-box' , function (e) {
     e.preventDefault();
+    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    var width = $('.tab-layout').width();
+    var height = $('.tab-layout').width();
     
+
     var x = e.clientX;
     var y = e.clientY;
-    $('.tab-layout').css('left' , x).css('top' , y).fadeIn();
+
+
+    var xx = x;
+    var yy = y;
+
+    if (x + width + 10 > w) {
+      xx = w - width - 90;
+    }
+    if (y + height + 10 > h) {
+      yy = y - height - 10;
+    }
+
+
+    console.log("Click:" , x, y)
+    $('.tab-layout').css('left' , xx).css('top' , yy).fadeIn();
     var scope = angular.element($('div[ng-controller="myCtrl"]')).scope();
     scope.focusDefinition($(this).attr('data-term'));
     // console.log("> scope" , scope);

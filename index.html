@@ -1455,35 +1455,6 @@ additional terms may apply.  By using this site, you agree to the <a href="https
 
 <script src="assets/lodash.js"></script>
 <script src='assets/angular.min.js'></script>
-<script src="dist/main.js"></script>
 
 
-<div  ng-app="myShoppingList" ng-controller="myCtrl" >
-  <div class='tab-layout'>
-    <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
-      <section>
-        <p data-meta-dic='description' ng-repeat='info in getDescriptions()'>
-          {{info.description}} <span class='source-name'>{{info.source}}</span>
-        </p>
-
-      </section>
-      
-      <section class='vertical-scrollable'>
-        <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
-          <h2>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></h2>
-          {{ugc.description}}
-
-          <div class='likes'>
-            <span class="upvote-count like-item">
-              {{ugc.upvote_count}}
-            </span>
-            <span class='like-item'>
-              <i class='glyphicon glyphicon-thumbs-up'></i>
-            </span>
-            
-          </div>
-        </section>      
-    </section>
-  </div>
-
-</div>
+ 

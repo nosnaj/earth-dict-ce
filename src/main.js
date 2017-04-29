@@ -6,9 +6,11 @@ var body = `
     <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
       <section>
         <p data-meta-dic='description' ng-repeat='info in getDescriptions()'>
+          
+          <br>
           {{info.description}} <span class='source-name'>{{info.source}}</span>
         </p>
-
+        
       </section>
       
       <section class='vertical-scrollable'>
@@ -27,13 +29,17 @@ var body = `
           </div>
         </section>      
     </section>
+    <a href='http://35.154.208.228/entry/new?key={{getTitle()}}'>
+      Add entry
+    </a>
   </div>
 
 </div>
 
 
+
 `;
-// document.body.innerHTML += body;
+document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {

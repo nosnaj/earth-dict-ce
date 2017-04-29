@@ -33,7 +33,7 @@ var body = `
 
 
 `;
-document.body.innerHTML += body;
+// document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {
@@ -49,6 +49,13 @@ function getResponseFromServer (content , $http) {
     
     $.post('https://acsmp3b92j.execute-api.ap-southeast-1.amazonaws.com/prod', criteria , function (data) {
       hightLightTerms(data);
+      
+      // mocking ugc
+      data = data.map(function (term) {
+        term.ugc = mockUGC(_.random(4,10));
+        return term;
+      });
+
       resolve(data);
     });
   });
@@ -102,20 +109,28 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
     return $scope.terms[$scope.index] ? $scope.terms[$scope.index].term : '';
   }
 
-  // find the content, post to server and highlight it
-  var content = getPageContent();
-  console.warn("Page content rate x: " , content.length);
+  $scope.initial = function () {
 
-  getResponseFromServer(content, $http).then(function (terms) {
-    $scope.terms = terms;
-    $scope.$apply();
-  }).catch(error => {
-    console.error("Error" , error);
-  })
+    // find the content, post to server and highlight it
+    var content = getPageContent();
+    console.warn("Page content rate x: " , content.length);
+    if (content.length == 0) return;
+    getResponseFromServer(content, $http).then(function (terms) {
+      $scope.terms = terms;
+      $scope.$apply();
+    }).catch(error => {
+      console.error("Error" , error);
+    })
+    
+    // jquery events for clicking on page
+    watchHighlight();
+  }
+ 
+    
+  $scope.initial();
+
+
   
-  // jquery events for clicking on page
-  watchHighlight();
-
 }]);
 
 

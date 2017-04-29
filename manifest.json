@@ -1,7 +1,11 @@
 {
   "manifest_version": 2,
-
-  "name": "Seek - Dictionary of Earth",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "name": "Seek Dictionary",
   "description": "This extension detects scientific terms and highlights them. Hovering shows a pop-up bubble definition.",
   "version": "1.0",
   "content_scripts": [

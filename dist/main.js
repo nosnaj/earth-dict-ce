@@ -14,14 +14,17 @@ function getPageContent () {
 
 function mockUGC (count) {
   let names = ["Ali" , "James", "Gladys" , "Janosn", "Joel", "Weilip"];  
-  let roles = ["Meteorlogist" , "Chimist" , "Programmer", "Scientist"]
+  let roles = ["Meteorlogist" , "Chimist" , "Programmer", "Scientist"];
+
+  const lorem = 'Maecenas eget sem venenatis, tristique tortor vel, pharetra augue. Mauris ornare nec diam sit amet rhoncus. Aenean interdum justo elit, non malesuada lorem venenatis vitae. Curabitur nec neque sollicitudin, euismod turpis dignissim, finibus lectus. In hac habitasse platea dictumst. Aenean sit amet consequat justo. Integer eu enim nulla.  Sed ante lectus, tincidunt et convallis at, pretium et purus. Donec molestie porttitor tincidunt. Maecenas sollicitudin nulla in euismod tincidunt. Pellentesque turpis erat, consequat id lorem nec, tempor commodo turpis.'.split(' ');
+
   return  _.times(count , function () {
       return {
       "id": 2,
       "user_name": _.sample(names),
       "user_role": _.sample(roles),
       "key": "Subsidence",
-      "description": "this is just a test2",
+      "description": _.times(_.random(2,6) , function () { return _.sample(lorem)}).join(' '),
       "image": null,
       "source": "Wiki",
       "upvote_count": _.random(1,15)
@@ -111,7 +114,7 @@ var body = `
 
 
 `;
-document.body.innerHTML += body;
+// document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {
@@ -127,6 +130,13 @@ function getResponseFromServer (content , $http) {
     
     $.post('https://acsmp3b92j.execute-api.ap-southeast-1.amazonaws.com/prod', criteria , function (data) {
       hightLightTerms(data);
+      
+      // mocking ugc
+      data = data.map(function (term) {
+        term.ugc = mockUGC(_.random(4,10));
+        return term;
+      });
+
       resolve(data);
     });
   });
@@ -180,20 +190,28 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
     return $scope.terms[$scope.index] ? $scope.terms[$scope.index].term : '';
   }
 
-  // find the content, post to server and highlight it
-  var content = getPageContent();
-  console.warn("Page content rate x: " , content.length);
+  $scope.initial = function () {
 
-  getResponseFromServer(content, $http).then(function (terms) {
-    $scope.terms = terms;
-    $scope.$apply();
-  }).catch(error => {
-    console.error("Error" , error);
-  })
+    // find the content, post to server and highlight it
+    var content = getPageContent();
+    console.warn("Page content rate x: " , content.length);
+    if (content.length == 0) return;
+    getResponseFromServer(content, $http).then(function (terms) {
+      $scope.terms = terms;
+      $scope.$apply();
+    }).catch(error => {
+      console.error("Error" , error);
+    })
+    
+    // jquery events for clicking on page
+    watchHighlight();
+  }
+ 
+    
+  $scope.initial();
+
+
   
-  // jquery events for clicking on page
-  watchHighlight();
-
 }]);
 
 

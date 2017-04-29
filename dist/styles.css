@@ -1,10 +1,12 @@
 .hightlight-box {
-  font-size: 25px;
+  color: green;
+  font-weight: bold;
+  background-color: #ffff80;
 }
 .tab-layout {
   display: none;
-  width: 450px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 350px;
+  font-family: Arial, Helvetica, sans-serif !important;
   position: fixed;
   top: 0;
   left: 0;
@@ -14,8 +16,12 @@
   border: 2px solid silver;
   box-shadow: 3px 3px 3px silver;
 }
+.tab-layout p[data-meta-dic='description'] {
+  font-size: 13px!important;
+}
 .tab-layout h1 {
-  font-size: 24px;
+  font-size: 22px!important;
+  font-family: Arial, Helvetica, sans-serif !important;
   font-weight: bold;
 }
 .tab-layout .vertical-scrollable {

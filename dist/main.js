@@ -47,9 +47,9 @@ function mockDescription (key) {
 
 
 function hightLightTerm (term = {term:'' , info: []}) {
-  console.warn(">>" , term.term);
-  let regex = new RegExp("(" + term.term + ")" , 'ig');
-  let replacement = "<a  class='hightlight-box' data-term='"+term.term+"'>[ $1 ]</a>";
+  //console.warn(">>" , term.term);
+  let regex = new RegExp("( " + term.term + "[ |\.])" , 'ig');
+  let replacement = " <a  class='hightlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
 
   $('p,span').each(function () {
     let html = $(this).html();
@@ -60,7 +60,7 @@ function hightLightTerm (term = {term:'' , info: []}) {
 
 function hightLightTerms (terms) {
   terms.forEach(function (term) {
-    console.warn("> Term" , term);
+    // console.warn("> Term" , term);
     hightLightTerm(term);
   });
 
@@ -77,6 +77,7 @@ function generateMockTerm (term = "have") {
 }
 ;
 var body = `
+
 
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
   <div class='tab-layout'>
@@ -110,7 +111,7 @@ var body = `
 
 
 `;
-// document.body.innerHTML += body;
+document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {

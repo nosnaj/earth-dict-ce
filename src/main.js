@@ -1,5 +1,6 @@
 var body = `
 
+
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
   <div class='tab-layout'>
     <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
@@ -32,7 +33,7 @@ var body = `
 
 
 `;
-// document.body.innerHTML += body;
+document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {

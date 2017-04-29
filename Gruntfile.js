@@ -1,6 +1,7 @@
 const grunt = require('grunt');
 grunt.loadNpmTasks('grunt-contrib-less');
 grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-concat');
 
 // Project configuration.
 grunt.initConfig({
@@ -36,21 +37,9 @@ grunt.initConfig({
         },
         dist: {
             src: [
-                'assets/scripts/jquery.min.js',
-                'assets/scripts/bootstrap.min.js',
-                'assets/scripts/material.min.js',
-                'assets/scripts/waypoints.min.js',
-                'assets/scripts/countto.min.js',
-                // 'assets/scripts/ekkolightbox.min.js',
-                'assets/scripts/wow.min.js',
-                'assets/scripts/owlcarousel.min.js',
-                'assets/scripts/device.min.js',
-                // 'assets/scripts/mb.YTPlayer.min.js',
-                // 'assets/scripts/masonry.min.js',
-                'assets/scripts/isotope.min.js',
-                'assets/scripts/hans.js'
+                'src/main.js'
             ],
-            dest: 'assets/scripts/all.js',
+            dest: 'dist/main.js',
         },
     },
     less: {

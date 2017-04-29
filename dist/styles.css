@@ -1,0 +1,48 @@
+.hightlight-box {
+  font-size: 25px;
+}
+.tab-layout {
+  width: 450px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: white;
+  padding: 5px 15px;
+  border: 2px solid silver;
+  box-shadow: 3px 3px 3px silver;
+}
+.tab-layout h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+.tab-layout .vertical-scrollable {
+  height: 250px;
+  overflow-y: auto;
+}
+.tab-layout .ugc-content-box {
+  margin-top: 30px;
+}
+.tab-layout .ugc-content-box h2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+.tab-layout .likes {
+  margin: 7px 0;
+  font-size: 16px;
+}
+.tab-layout .likes .upvote-count {
+  color: green;
+  font-weight: bold;
+}
+.tab-layout .likes .like-item {
+  margin-right: 8px;
+}
+.tab-layout .ugc-role,
+.tab-layout .source-name {
+  color: silver;
+  font-size: 12px;
+  text-transform: uppercase;
+}

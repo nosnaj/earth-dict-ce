@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+
+  "name": "Seek - Dictionary of Earth",
+  "description": "This extension detects scientific terms and highlights them. Hovering shows a pop-up bubble definition.",
+  "version": "1.0",
+  "content_scripts": [
+   
+
+    {
+        "matches": [
+          "<all_urls>"
+        ],
+        "js": [
+          "jquery.js",
+          "script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+
+    "main.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

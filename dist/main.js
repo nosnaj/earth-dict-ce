@@ -78,7 +78,6 @@ function generateMockTerm (term = "have") {
 ;
 var body = `
 
-
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
   <div class='tab-layout'>
     <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
@@ -114,7 +113,27 @@ var body = `
 // document.body.innerHTML += body;
 
 
-function getResponseFromServer () {
+function getResponseFromServer (content , $http) {
+ 
+
+
+  // console.log("Terms: " , terms);
+  var criteria = {
+    body: content
+  };
+  
+  return new Promise(function (resolve ,reject) {
+    
+    $.post('https://acsmp3b92j.execute-api.ap-southeast-1.amazonaws.com/prod', criteria , function (data) {
+      hightLightTerms(data);
+      resolve(data);
+    });
+  });
+   
+}
+
+
+function getResponseFromServerMock () {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
 
@@ -122,7 +141,6 @@ function getResponseFromServer () {
 
       var terms = d.map(function (word) { return generateMockTerm(word)});
       hightLightTerms(terms);
-      console.log("Terms: " , terms);
       resolve(terms);
     }, 200);
 
@@ -130,7 +148,7 @@ function getResponseFromServer () {
 }
 
 var app = angular.module("myShoppingList", []); 
-app.controller("myCtrl", function($scope) {
+app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
   $scope.terms = [];
   $scope.index = 0;
@@ -165,7 +183,7 @@ app.controller("myCtrl", function($scope) {
   var content = getPageContent();
   console.warn("Page content rate x: " , content.length);
 
-  getResponseFromServer(content).then(function (terms) {
+  getResponseFromServer(content, $http).then(function (terms) {
     $scope.terms = terms;
     $scope.$apply();
   }).catch(error => {
@@ -175,7 +193,7 @@ app.controller("myCtrl", function($scope) {
   // jquery events for clicking on page
   watchHighlight();
 
-});
+}]);
 
 
  
@@ -189,7 +207,7 @@ function watchHighlight () {
     $('.tab-layout').css('left' , x).css('top' , y).fadeIn();
     var scope = angular.element($('div[ng-controller="myCtrl"]')).scope();
     scope.focusDefinition($(this).attr('data-term'));
-    console.log("> scope" , scope);
+    // console.log("> scope" , scope);
 
   });
 

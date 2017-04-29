@@ -1448,43 +1448,42 @@ additional terms may apply.  By using this site, you agree to the <a href="https
 <div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>
 
 
-<script src="assets/lodash.js"></script>
-<script src='node_modules/angular/angular.min.js'></script>
-<script src="dist/main.js"></script>
 
 
 <link rel="stylesheet" href="dist/styles.css">
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
- 
+<link rel="stylesheet" href="assets/bootstrap.min.css">
 
-<div class='tab-layout' ng-app="myShoppingList" ng-controller="myCtrl">
-  <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
+<script src="assets/lodash.js"></script>
+<script src='assets/angular.min.js'></script>
+<script src="dist/main.js"></script>
 
-    <section>
-      
-      <p data-meta-dic='description' ng-repeat='info in getDescriptions()'>
-        {{info.description}} <span class='source-name'>{{info.source}}</span>
-      </p>
 
-    </section>
-    
-    <section class='vertical-scrollable'>
-      <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
-        <h2>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></h2>
-        {{ugc.description}}
+<div  ng-app="myShoppingList" ng-controller="myCtrl" >
+  <div class='tab-layout'>
+    <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
+      <section>
+        <p data-meta-dic='description' ng-repeat='info in getDescriptions()'>
+          {{info.description}} <span class='source-name'>{{info.source}}</span>
+        </p>
 
-        <div class='likes'>
-          <span class="upvote-count like-item">
-            {{ugc.upvote_count}}
-          </span>
-          <span class='like-item'>
-            <i class='glyphicon glyphicon-thumbs-up'></i>
-          </span>
-          
-        </div>
       </section>
       
-  </section>
-    
-    
+      <section class='vertical-scrollable'>
+        <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
+          <h2>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></h2>
+          {{ugc.description}}
+
+          <div class='likes'>
+            <span class="upvote-count like-item">
+              {{ugc.upvote_count}}
+            </span>
+            <span class='like-item'>
+              <i class='glyphicon glyphicon-thumbs-up'></i>
+            </span>
+            
+          </div>
+        </section>      
+    </section>
+  </div>
+
 </div>

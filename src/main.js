@@ -1,3 +1,41 @@
+var body = `
+
+
+<div  ng-app="myShoppingList" ng-controller="myCtrl" >
+  <div class='tab-layout'>
+    <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
+      <section>
+        <p data-meta-dic='description' ng-repeat='info in getDescriptions()'>
+          {{info.description}} <span class='source-name'>{{info.source}}</span>
+        </p>
+
+      </section>
+      
+      <section class='vertical-scrollable'>
+        <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
+          <h2>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></h2>
+          {{ugc.description}}
+
+          <div class='likes'>
+            <span class="upvote-count like-item">
+              {{ugc.upvote_count}}
+            </span>
+            <span class='like-item'>
+              <i class='glyphicon glyphicon-thumbs-up'></i>
+            </span>
+            
+          </div>
+        </section>      
+    </section>
+  </div>
+
+</div>
+
+
+`;
+// document.body.innerHTML += body;
+
+
 function getResponseFromServer () {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
@@ -6,6 +44,7 @@ function getResponseFromServer () {
 
       var terms = d.map(function (word) { return generateMockTerm(word)});
       hightLightTerms(terms);
+      console.log("Terms: " , terms);
       resolve(terms);
     }, 200);
 
@@ -15,46 +54,65 @@ function getResponseFromServer () {
 var app = angular.module("myShoppingList", []); 
 app.controller("myCtrl", function($scope) {
 
-    $scope.terms = [];
-    $scope.getUGC = function () {
-      return $scope.terms[0] ? $scope.terms[0].ugc : [];
-    };
+  $scope.terms = [];
+  $scope.index = 0;
 
-    $scope.getDescriptions = function () {
-      return $scope.terms[0] ? $scope.terms[0].info : [];
-    };
+  $scope.focusDefinition = function (termKey) {
 
-    $scope.getTitle = function () {
-      return $scope.terms[0] ? $scope.terms[0].term : '';
-    }
-
-    // find the content, post to server and highlight it
-    var content = getPageContent();
-    console.warn("Page content rate x: " , content.length);
-
-    getResponseFromServer(content).then(function (terms) {
-      $scope.terms = terms;
-      $scope.$apply();
-    }).catch(error => {
-      console.error("Error" , error);
-    })
+    $scope.terms.map(function (term, index) {
+      if (term.term == termKey) {
+        $scope.index = index;
+      }
+    });
+    console.log($scope.index);
     
-    // jquery events for clicking on page
-    watchHighlight();
+    $scope.$apply();
+  }
+
+
+  
+  $scope.getUGC = function () {
+    return $scope.terms[$scope.index] ? $scope.terms[$scope.index].ugc : [];
+  };
+
+  $scope.getDescriptions = function () {
+    return $scope.terms[$scope.index] ? $scope.terms[$scope.index].info : [];
+  };
+
+  $scope.getTitle = function () {
+    return $scope.terms[$scope.index] ? $scope.terms[$scope.index].term : '';
+  }
+
+  // find the content, post to server and highlight it
+  var content = getPageContent();
+  console.warn("Page content rate x: " , content.length);
+
+  getResponseFromServer(content).then(function (terms) {
+    $scope.terms = terms;
+    $scope.$apply();
+  }).catch(error => {
+    console.error("Error" , error);
+  })
+  
+  // jquery events for clicking on page
+  watchHighlight();
 
 });
 
 
  
-
-
 function watchHighlight () {
 
   $('body').on('click' , '.hightlight-box' , function (e) {
     e.preventDefault();
+    
     var x = e.clientX;
     var y = e.clientY;
     $('.tab-layout').css('left' , x).css('top' , y).fadeIn();
+    var scope = angular.element($('div[ng-controller="myCtrl"]')).scope();
+    scope.focusDefinition($(this).attr('data-term'));
+    console.log("> scope" , scope);
+
   });
 
   $(window).scroll(function () {
@@ -67,4 +125,4 @@ function watchHighlight () {
 }
 
 
- 
+

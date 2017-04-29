@@ -49,7 +49,7 @@ function mockDescription (key) {
 function hightLightTerm (term = {term:'' , info: []}) {
   console.warn(">>" , term.term);
   let regex = new RegExp("(" + term.term + ")" , 'ig');
-  let replacement = "<a  class='hightlight-box'>[ $1 ]</a>";
+  let replacement = "<a  class='hightlight-box' data-term='"+term.term+"'>[ $1 ]</a>";
 
   $('p,span').each(function () {
     let html = $(this).html();

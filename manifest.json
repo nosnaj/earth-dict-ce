@@ -12,18 +12,23 @@
           "<all_urls>"
         ],
         "js": [
-          "jquery.js",
-          "script.js"
-      ],
-      "all_frames": true
+          "assets/lodash.js",
+          "assets/angular.min.js",
+          "assets/jquery.js",
+          "dist/main.js"
+        ],
+        "css": [
+          "dist/styles.css"
+        ],
+        "all_frames": true
     }
   ],
   "permissions": [
     "activeTab"
   ],
   "web_accessible_resources": [
-
-    "main.js"
+    "dist/main.js",
+    "dist/styles.css"
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

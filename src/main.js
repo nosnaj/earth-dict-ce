@@ -2,32 +2,33 @@ var body = `
 
 
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
-  <div class='tab-layout'>
-    <h1 data-meta-dic='title'>{{ getTitle() }}</h1>
+  <div class='tab-layout vertical-scrollable' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+    <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
       <section>
-        <p data-meta-dic='description' ng-repeat='info in getDescriptions()'>
-          
-          <br>
-          {{info.description}} <span class='source-name'>{{info.source}}</span>
-        </p>
-        
+        <div data-meta-dic='description' ng-repeat='info in getDescriptions()'>
+          <p class='wide-spacing'>
+            {{info.description}}
+          </p>
+          <p class='source-name'>source: {{info.source}}</p>
+        </div>
+
       </section>
-      
-      <section class='vertical-scrollable'>
+
+      <div class='header-2'>Other definition(s)</div>
+      <section>
         <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
-          <h2>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></h2>
-          {{ugc.description}}
+          <div class='contributor'>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></div>
+          <div data-meta-dic='description'>{{ugc.description}}</div>
 
           <div class='likes'>
+            <span class='like-item'>
+              <img style='width: 15px; height: 15px' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQdFzUDZG5t/AAAAEF0RVh0Q29tbWVudABDUkVBVE9SOiBnZC1qcGVnIHYxLjAgKHVzaW5nIElKRyBKUEVHIHY4MCksIHF1YWxpdHkgPSA5MAp9VNrdAAACgUlEQVQ4y6WVTUsyURTHzzhq4PhCkQpBiabgLtxJhCKmm2jVKvwAbkQZXNfSjSKCblu4iL6Bi0rEhSC4EhEqF67Gt5BSx/FltPssbo+PZuo89d+dM//7u5zDOXcACdDDw4NGo6EoyuVyPT4+rrLBRlC1WoVF3d3d/ZAVi8UAgKZphNDt7S3G/ZB1eXlJEMT9/T0OrVYrABQKhWWnCDYpn8+TJGk0GnFoNpsBoNVqLTs3sOLxeLVa1Wg0er0eZxiGAQCKor5xr6kulUphz/PzM84Mh0OcGQwG/9Gver2OjyWTyVnS7/cDwMnJSaVSKRaLpVKJYZh1rI+Pj36/f3BwAABXV1ezfL/f1+l0X8pSKBTX19fYQCCEeJ5Pp9ODwQB/lkql4XA4m83abLZsNjs71ul0fD4fx3GzzGg0SqfTw+EwGo3SNA0IIYvFstxHvV4vZCWenp5IkjQYDBzHQa1Wk8vl85TDw8NIJMLzvBAWx3EGg2F3d/ft7Q0YhlEoFPOs8/NzJFitVksul+t0OpZlN8/qel1cXLAs63a7KYr6LctutwPA0dHR5rnfKJIkAWA8Hn/uxI/71ev1MOvl5UXQbq8Rz/PT6XRnZ8dkMv22xna7jUd/4Z0QiUS5XC4QCAgHIYSCwSAAeDyeBZZarT4+PnY4HAAgkUgE4kqlkkwm83q9n/Hr66tSqZx3iMXivb09r9dbLpdZll3V+PF4rFKptre3O53Ov3cikUisunl/f//s7Ozm5qbZbM6D3t/fnU4nAJyenn7z5vB/NZlMGo1GKBSyWCwqlWoeLZVKt7a2CILAoVarHY1Ggv4d0+m03W5nMhmPx/OlDxKJhKbpbrc77/8DnSxjSlY8/6gAAAAASUVORK5CYII=' >
+            </span>
             <span class="upvote-count like-item">
               {{ugc.upvote_count}}
             </span>
-            <span class='like-item'>
-              <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQdFzUDZG5t/AAAAEF0RVh0Q29tbWVudABDUkVBVE9SOiBnZC1qcGVnIHYxLjAgKHVzaW5nIElKRyBKUEVHIHY4MCksIHF1YWxpdHkgPSA5MAp9VNrdAAACgUlEQVQ4y6WVTUsyURTHzzhq4PhCkQpBiabgLtxJhCKmm2jVKvwAbkQZXNfSjSKCblu4iL6Bi0rEhSC4EhEqF67Gt5BSx/FltPssbo+PZuo89d+dM//7u5zDOXcACdDDw4NGo6EoyuVyPT4+rrLBRlC1WoVF3d3d/ZAVi8UAgKZphNDt7S3G/ZB1eXlJEMT9/T0OrVYrABQKhWWnCDYpn8+TJGk0GnFoNpsBoNVqLTs3sOLxeLVa1Wg0er0eZxiGAQCKor5xr6kulUphz/PzM84Mh0OcGQwG/9Gver2OjyWTyVnS7/cDwMnJSaVSKRaLpVKJYZh1rI+Pj36/f3BwAABXV1ezfL/f1+l0X8pSKBTX19fYQCCEeJ5Pp9ODwQB/lkql4XA4m83abLZsNjs71ul0fD4fx3GzzGg0SqfTw+EwGo3SNA0IIYvFstxHvV4vZCWenp5IkjQYDBzHQa1Wk8vl85TDw8NIJMLzvBAWx3EGg2F3d/ft7Q0YhlEoFPOs8/NzJFitVksul+t0OpZlN8/qel1cXLAs63a7KYr6LctutwPA0dHR5rnfKJIkAWA8Hn/uxI/71ev1MOvl5UXQbq8Rz/PT6XRnZ8dkMv22xna7jUd/4Z0QiUS5XC4QCAgHIYSCwSAAeDyeBZZarT4+PnY4HAAgkUgE4kqlkkwm83q9n/Hr66tSqZx3iMXivb09r9dbLpdZll3V+PF4rFKptre3O53Ov3cikUisunl/f//s7Ozm5qbZbM6D3t/fnU4nAJyenn7z5vB/NZlMGo1GKBSyWCwqlWoeLZVKt7a2CILAoVarHY1Ggv4d0+m03W5nMhmPx/OlDxKJhKbpbrc77/8DnSxjSlY8/6gAAAAASUVORK5CYII='>
-            </span>
-            
           </div>
-        </section>      
+        </section>
     </section>
     <a href='http://35.154.208.228/entry/new?key={{getTitle()}}' style='padding:5px 30px; background:blue; color:white; display:inline-block;'>
       Add entry
@@ -43,19 +44,19 @@ document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {
- 
+
 
 
   // console.log("Terms: " , terms);
   var criteria = {
     body: content
   };
-  
+
   return new Promise(function (resolve ,reject) {
-    
+
     $.post('https://acsmp3b92j.execute-api.ap-southeast-1.amazonaws.com/prod', criteria , function (data) {
       hightLightTerms(data);
-      
+
       // mocking ugc
       data = data.map(function (term) {
         term.ugc = mockUGC(_.random(4,10));
@@ -65,7 +66,7 @@ function getResponseFromServer (content , $http) {
       resolve(data);
     });
   });
-   
+
 }
 
 
@@ -83,7 +84,7 @@ function getResponseFromServerMock () {
   });
 }
 
-var app = angular.module("myShoppingList", []); 
+var app = angular.module("myShoppingList", []);
 app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
   $scope.terms = [];
@@ -97,12 +98,12 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
       }
     });
     console.log($scope.index);
-    
+
     $scope.$apply();
   }
 
 
-  
+
   $scope.getUGC = function () {
     return $scope.terms[$scope.index] ? $scope.terms[$scope.index].ugc : [];
   };
@@ -127,20 +128,20 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
     }).catch(error => {
       console.error("Error" , error);
     })
-    
+
     // jquery events for clicking on page
     watchHighlight();
   }
- 
-    
+
+
   $scope.initial();
 
 
-  
+
 }]);
 
 
- 
+
 function watchHighlight () {
 
   $('body').on('click' , '.hightlight-box' , function (e) {
@@ -148,8 +149,8 @@ function watchHighlight () {
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var width = $('.tab-layout').width();
-    var height = $('.tab-layout').width();
-    
+    var height = $('.tab-layout').height();
+
 
     var x = e.clientX;
     var y = e.clientY;
@@ -174,14 +175,17 @@ function watchHighlight () {
 
   });
 
-  $(window).scroll(function () {
+  $(window).scroll(function (e) {
     $('.tab-layout').fadeOut();
   });
 
-  $(window).resize(function () {
-    $('.tab-layout').fadeOut();
-  })
+  // $(window).resize(function () {
+  //   $('.tab-layout').fadeOut();
+  // })
+
+  $(window).click(function (e) {
+    if(e.target.tagName !== 'A') {
+      $('.tab-layout').fadeOut();
+    }
+  });
 }
-
-
-

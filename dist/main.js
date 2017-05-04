@@ -273,4 +273,8 @@ function watchHighlight () {
   $('.vertical-scrollable').scroll(function (e) {
     e.stopPropagation();
   })
+
+  $('.vertical-scrollable').click(function (e) {
+    e.stopPropagation();
+  })
 }

@@ -13,7 +13,7 @@ function getPageContent () {
 }
 
 function mockUGC (count) {
-  let names = ["Ali" , "James", "Gladys" , "Janosn", "Joel", "Weilip"];  
+  let names = ["Ali" , "James", "Gladys" , "Janosn", "Joel", "Weilip"];
   let roles = ["Meteorlogist" , "Chimist" , "Programmer", "Scientist"];
 
   const lorem = 'Maecenas eget sem venenatis, tristique tortor vel, pharetra augue. Mauris ornare nec diam sit amet rhoncus. Aenean interdum justo elit, non malesuada lorem venenatis vitae. Curabitur nec neque sollicitudin, euismod turpis dignissim, finibus lectus. In hac habitasse platea dictumst. Aenean sit amet consequat justo. Integer eu enim nulla.  Sed ante lectus, tincidunt et convallis at, pretium et purus. Donec molestie porttitor tincidunt. Maecenas sollicitudin nulla in euismod tincidunt. Pellentesque turpis erat, consequat id lorem nec, tempor commodo turpis.'.split(' ');
@@ -24,18 +24,18 @@ function mockUGC (count) {
       "user_name": _.sample(names),
       "user_role": _.sample(roles),
       "key": "Subsidence",
-      "description": _.times(_.random(2,6) , function () { return _.sample(lorem)}).join(' '),
+      "description": "Dummy Data. No crowdsourced content available yet",
       "image": null,
       "source": "Wiki",
       "upvote_count": _.random(1,15)
     };
   });
 
-  
+
 }
 
 function mockDescription (key) {
-  
+
   const lorem = 'Maecenas eget sem venenatis, tristique tortor vel, pharetra augue. Mauris ornare nec diam sit amet rhoncus. Aenean interdum justo elit, non malesuada lorem venenatis vitae. Curabitur nec neque sollicitudin, euismod turpis dignissim, finibus lectus. In hac habitasse platea dictumst. Aenean sit amet consequat justo. Integer eu enim nulla. Morbi commodo elit sit amet odio efficitur lobortis. Phasellus sollicitudin elementum commodo. Etiam dignissim enim turpis, ut laoreet nunc consectetur at. Pellentesque hendrerit, augue in ornare sodales, ante magna gravida magna, sed euismod elit dolor in ligula. Nullam feugiat felis vitae nisi ultrices molestie. Sed ante lectus, tincidunt et convallis at, pretium et purus. Donec molestie porttitor tincidunt. Maecenas sollicitudin nulla in euismod tincidunt. Pellentesque turpis erat, consequat id lorem nec, tempor commodo turpis.'.split(' ');
 
   return _.times(2, function () {
@@ -58,7 +58,7 @@ function hightLightTerm (term = {term:'' , info: []}) {
     let html = $(this).html();
     $(this).html(html.replace(regex, replacement));
   })
-  
+
 }
 
 function hightLightTerms (terms) {
@@ -71,7 +71,7 @@ function hightLightTerms (terms) {
 
 
 function generateMockTerm (term = "have") {
-  
+
   return {
     "term": term,
     "info": mockDescription(),

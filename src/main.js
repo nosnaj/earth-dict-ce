@@ -1,38 +1,50 @@
 var body = `
 
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
-  <div class='tab-layout vertical-scrollable'>
-    <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
+  <div class='tab-layout'>
+    <div class='vertical-scrollable'>
+      <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
       <section>
         <div data-meta-dic='description' ng-repeat='info in getDescriptions()'>
           <p class='wide-spacing' ng-bind-html='info.description'>
           </p>
           <p class='source-name'>trusted source: {{info.source}}</p>
         </div>
-
       </section>
 
-      <div class='header-2'>Other definition(s)</div>
+      <div class='header-2'>Helpful illustration</div>
       <section>
-        <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
-          <div class='contributor'>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></div>
-          <div data-meta-dic='description'>{{ugc.description}}</div>
+        <img class='helpful-illustration-doe' ng-if="getImage() === ''" src='https://ekoservis-praha.eu/static/images/noimg.jpg'></img>
+        <img class='helpful-illustration-doe' ng-if="getImage() !== ''" ng-src='{{ getImage() }}' onerror="this.src='https://ekoservis-praha.eu/static/images/noimg.jpg'"></img>
+      </section>
 
-          <div class='likes'>
-            <span class='like-item'>
-              <img style='width: 15px; height: 15px' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQdFzUDZG5t/AAAAEF0RVh0Q29tbWVudABDUkVBVE9SOiBnZC1qcGVnIHYxLjAgKHVzaW5nIElKRyBKUEVHIHY4MCksIHF1YWxpdHkgPSA5MAp9VNrdAAACgUlEQVQ4y6WVTUsyURTHzzhq4PhCkQpBiabgLtxJhCKmm2jVKvwAbkQZXNfSjSKCblu4iL6Bi0rEhSC4EhEqF67Gt5BSx/FltPssbo+PZuo89d+dM//7u5zDOXcACdDDw4NGo6EoyuVyPT4+rrLBRlC1WoVF3d3d/ZAVi8UAgKZphNDt7S3G/ZB1eXlJEMT9/T0OrVYrABQKhWWnCDYpn8+TJGk0GnFoNpsBoNVqLTs3sOLxeLVa1Wg0er0eZxiGAQCKor5xr6kulUphz/PzM84Mh0OcGQwG/9Gver2OjyWTyVnS7/cDwMnJSaVSKRaLpVKJYZh1rI+Pj36/f3BwAABXV1ezfL/f1+l0X8pSKBTX19fYQCCEeJ5Pp9ODwQB/lkql4XA4m83abLZsNjs71ul0fD4fx3GzzGg0SqfTw+EwGo3SNA0IIYvFstxHvV4vZCWenp5IkjQYDBzHQa1Wk8vl85TDw8NIJMLzvBAWx3EGg2F3d/ft7Q0YhlEoFPOs8/NzJFitVksul+t0OpZlN8/qel1cXLAs63a7KYr6LctutwPA0dHR5rnfKJIkAWA8Hn/uxI/71ev1MOvl5UXQbq8Rz/PT6XRnZ8dkMv22xna7jUd/4Z0QiUS5XC4QCAgHIYSCwSAAeDyeBZZarT4+PnY4HAAgkUgE4kqlkkwm83q9n/Hr66tSqZx3iMXivb09r9dbLpdZll3V+PF4rFKptre3O53Ov3cikUisunl/f//s7Ozm5qbZbM6D3t/fnU4nAJyenn7z5vB/NZlMGo1GKBSyWCwqlWoeLZVKt7a2CILAoVarHY1Ggv4d0+m03W5nMhmPx/OlDxKJhKbpbrc77/8DnSxjSlY8/6gAAAAASUVORK5CYII=' >
-            </span>
-            <span class="upvote-count like-item">
-              {{ugc.upvote_count}}
-            </span>
-          </div>
-        </section>
-    </section>
-    <a href='http://35.154.208.228/entry/new?key={{getTitle()}}' style='padding:5px 30px; background:blue; color:white; display:inline-block;'>
-      Add entry
-    </a>
+      <div class='header-2'>Crowdsourced definitions/comments</div>
+      <section>
+          <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
+            <div class='contributor'>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></div>
+            <div data-meta-dic='description'>{{ugc.description}}</div>
+
+            <div class='likes'>
+              <span class='like-item'>
+                <a class='btn btn-link'>
+                  <img style='width: 15px; height: 15px' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQdFzUDZG5t/AAAAEF0RVh0Q29tbWVudABDUkVBVE9SOiBnZC1qcGVnIHYxLjAgKHVzaW5nIElKRyBKUEVHIHY4MCksIHF1YWxpdHkgPSA5MAp9VNrdAAACgUlEQVQ4y6WVTUsyURTHzzhq4PhCkQpBiabgLtxJhCKmm2jVKvwAbkQZXNfSjSKCblu4iL6Bi0rEhSC4EhEqF67Gt5BSx/FltPssbo+PZuo89d+dM//7u5zDOXcACdDDw4NGo6EoyuVyPT4+rrLBRlC1WoVF3d3d/ZAVi8UAgKZphNDt7S3G/ZB1eXlJEMT9/T0OrVYrABQKhWWnCDYpn8+TJGk0GnFoNpsBoNVqLTs3sOLxeLVa1Wg0er0eZxiGAQCKor5xr6kulUphz/PzM84Mh0OcGQwG/9Gver2OjyWTyVnS7/cDwMnJSaVSKRaLpVKJYZh1rI+Pj36/f3BwAABXV1ezfL/f1+l0X8pSKBTX19fYQCCEeJ5Pp9ODwQB/lkql4XA4m83abLZsNjs71ul0fD4fx3GzzGg0SqfTw+EwGo3SNA0IIYvFstxHvV4vZCWenp5IkjQYDBzHQa1Wk8vl85TDw8NIJMLzvBAWx3EGg2F3d/ft7Q0YhlEoFPOs8/NzJFitVksul+t0OpZlN8/qel1cXLAs63a7KYr6LctutwPA0dHR5rnfKJIkAWA8Hn/uxI/71ev1MOvl5UXQbq8Rz/PT6XRnZ8dkMv22xna7jUd/4Z0QiUS5XC4QCAgHIYSCwSAAeDyeBZZarT4+PnY4HAAgkUgE4kqlkkwm83q9n/Hr66tSqZx3iMXivb09r9dbLpdZll3V+PF4rFKptre3O53Ov3cikUisunl/f//s7Ozm5qbZbM6D3t/fnU4nAJyenn7z5vB/NZlMGo1GKBSyWCwqlWoeLZVKt7a2CILAoVarHY1Ggv4d0+m03W5nMhmPx/OlDxKJhKbpbrc77/8DnSxjSlY8/6gAAAAASUVORK5CYII=' >
+                </a>
+              </span>
+              <a class='btn btn-link'>
+                <span class="upvote-count like-item">
+                  {{ugc.upvote_count}}
+                </span>
+              </a>
+            </div>
+          </section>
+      </section>
+    </div>
+    <div class='add-entry'>
+      <a class='btn-add-entry' href='http://35.154.208.228/entry/new?key={{getTitle()}}'>
+        Add definition/comment
+      </a>
+    </div>
   </div>
-
 </div>
 
 
@@ -42,10 +54,6 @@ document.body.innerHTML += body;
 
 
 function getResponseFromServer (content , $http) {
-
-
-
-  // console.log("Terms: " , terms);
   var criteria = {
     body: content
   };
@@ -56,8 +64,9 @@ function getResponseFromServer (content , $http) {
       hightLightTerms(data);
 
       // mocking ugc
+      var ugc = mockUGC(_.random(2,5)); // Using same ugc term
       data = data.map(function (term) {
-        term.ugc = mockUGC(_.random(4,10));
+        term.ugc = ugc;
         return term;
       });
 
@@ -112,6 +121,16 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
   $scope.getTitle = function () {
     return $scope.terms[$scope.index] ? $scope.terms[$scope.index].term : '';
+  }
+
+  $scope.getImage = function() {
+    var keyword = $scope.getTitle();
+    for(var i = 0; i < $scope.terms.length; i++) {
+      var term = $scope.terms[i];
+      if(term.term == keyword) {
+        return term.info[0].image;
+      }
+    }
   }
 
   $scope.initial = function () {
@@ -177,7 +196,7 @@ function watchHighlight () {
   });
 
   // $(window).resize(function () {
-  //   $('.tab-layout').fadeOut();
+  //   $('.vertical-scrollable').is(':visible') && fadeOutDiv();
   // })
 
   $(window).click(function (e) {
@@ -196,6 +215,5 @@ function watchHighlight () {
 }
 
 function fadeOutDiv() {
-  $('.vertical-scrollable').scrollTop(0);
   $('.tab-layout').fadeOut();
 }

@@ -24,8 +24,53 @@ p.wide-spacing {
   font-size: 1rem;
 }
 .vertical-scrollable {
-  height: 400px;
+  height: 370px;
+  margin-bottom: 10px;
   overflow-y: auto;
+}
+.with-border-doe {
+  border: 1px solid grey;
+}
+.add-entry {
+  height: 30px;
+  margin-bottom: 5px;
+}
+.add-entry .btn-add-entry {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #2196F3;
+  border-color: #2196F3;
+}
+.add-entry .btn-add-entry:hover {
+  text-decoration: none;
+}
+.no-picture-text {
+  color: silver;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.helpful-illustration-doe {
+  width: 150px;
+  height: 100px;
 }
 .tab-layout {
   display: none;

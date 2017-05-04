@@ -83,7 +83,7 @@ var body = `
 
 
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
-  <div class='tab-layout vertical-scrollable' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+  <div class='tab-layout vertical-scrollable'>
     <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
       <section>
         <div data-meta-dic='description' ng-repeat='info in getDescriptions()'>
@@ -256,7 +256,7 @@ function watchHighlight () {
 
   });
 
-  $(window).scroll(function (e) {
+  $(window).scroll(function(e) {
     $('.tab-layout').fadeOut();
   });
 
@@ -265,8 +265,12 @@ function watchHighlight () {
   // })
 
   $(window).click(function (e) {
-    if(e.target.tagName !== 'A') {
+    if(e.target.className !== 'hightlight-box') {
       $('.tab-layout').fadeOut();
     }
   });
+
+  $('.vertical-scrollable').scroll(function (e) {
+    e.stopPropagation();
+  })
 }

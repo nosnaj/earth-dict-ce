@@ -257,7 +257,7 @@ function watchHighlight () {
   });
 
   $(window).scroll(function(e) {
-    $('.tab-layout').fadeOut();
+      $('.vertical-scrollable').is(':visible') && fadeOutDiv();
   });
 
   // $(window).resize(function () {
@@ -266,7 +266,7 @@ function watchHighlight () {
 
   $(window).click(function (e) {
     if(e.target.className !== 'hightlight-box') {
-      $('.tab-layout').fadeOut();
+      fadeOutDiv();
     }
   });
 
@@ -277,4 +277,9 @@ function watchHighlight () {
   $('.vertical-scrollable').click(function (e) {
     e.stopPropagation();
   })
+}
+
+function fadeOutDiv() {
+  $('.vertical-scrollable').scrollTop(0);
+  $('.tab-layout').fadeOut();
 }

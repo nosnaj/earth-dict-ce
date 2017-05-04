@@ -81,16 +81,14 @@ function generateMockTerm (term = "have") {
 ;
 var body = `
 
-
 <div  ng-app="myShoppingList" ng-controller="myCtrl" >
   <div class='tab-layout vertical-scrollable'>
     <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
       <section>
         <div data-meta-dic='description' ng-repeat='info in getDescriptions()'>
-          <p class='wide-spacing'>
-            {{info.description}}
+          <p class='wide-spacing' ng-bind-html='info.description'>
           </p>
-          <p class='source-name'>source: {{info.source}}</p>
+          <p class='source-name'>trusted source: {{info.source}}</p>
         </div>
 
       </section>
@@ -165,7 +163,7 @@ function getResponseFromServerMock () {
   });
 }
 
-var app = angular.module("myShoppingList", []);
+var app = angular.module("myShoppingList", ['ngSanitize']);
 app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
   $scope.terms = [];
@@ -198,7 +196,6 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
   }
 
   $scope.initial = function () {
-
     // find the content, post to server and highlight it
     var content = getPageContent();
     console.warn("Page content rate x: " , content.length);

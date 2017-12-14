@@ -121,7 +121,7 @@ var body = `
       </section>
     </div>
     <div class='add-entry'>
-      <a class='btn-add-entry' href='http://35.154.208.228/entry/new?key={{getTitle()}}'>
+      <a class='btn-add-entry' href='http://ec2-13-229-89-43.ap-southeast-1.compute.amazonaws.com/entry/new?key={{getTitle()}}'>
         Add definition/comment
       </a>
     </div>

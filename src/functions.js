@@ -13,8 +13,8 @@ function getPageContent () {
 }
 
 function mockUGC (count) {
-  let names = ["Ali" , "James", "Gladys" , "Janosn", "Joel", "Weilip"];
-  let roles = ["Meteorlogist" , "Chimist" , "Programmer", "Scientist"];
+  let names = ["Ali" , "James", "Gladys" , "Janson", "Joel", "Weilip"];
+  let roles = ["Meteorlogist" , "Chemist" , "Programmer", "Scientist"];
 
   const lorem = 'Maecenas eget sem venenatis, tristique tortor vel, pharetra augue. Mauris ornare nec diam sit amet rhoncus. Aenean interdum justo elit, non malesuada lorem venenatis vitae. Curabitur nec neque sollicitudin, euismod turpis dignissim, finibus lectus. In hac habitasse platea dictumst. Aenean sit amet consequat justo. Integer eu enim nulla.  Sed ante lectus, tincidunt et convallis at, pretium et purus. Donec molestie porttitor tincidunt. Maecenas sollicitudin nulla in euismod tincidunt. Pellentesque turpis erat, consequat id lorem nec, tempor commodo turpis.'.split(' ');
 
@@ -49,10 +49,10 @@ function mockDescription (key) {
 }
 
 
-function hightLightTerm (term = {term:'' , info: []}) {
+function highLightTerm (term = {term:'' , info: []}) {
   //console.warn(">>" , term.term);
   let regex = new RegExp("( " + term.term + "[ |\.])" , 'ig');
-  let replacement = " <a  class='hightlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
+  let replacement = " <a  class='highlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
 
   $('p,span').each(function () {
     let html = $(this).html();
@@ -61,10 +61,10 @@ function hightLightTerm (term = {term:'' , info: []}) {
 
 }
 
-function hightLightTerms (terms) {
+function highLightTerms (terms) {
   terms.forEach(function (term) {
     // console.warn("> Term" , term);
-    hightLightTerm(term);
+    highLightTerm(term);
   });
 
 }

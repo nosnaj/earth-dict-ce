@@ -13,8 +13,8 @@ function getPageContent () {
 }
 
 function mockUGC (count) {
-  let names = ["Ali" , "James", "Gladys" , "Janosn", "Joel", "Weilip"];
-  let roles = ["Meteorlogist" , "Chimist" , "Programmer", "Scientist"];
+  let names = ["Ali" , "James", "Gladys" , "Janson", "Joel", "Weilip"];
+  let roles = ["Meteorlogist" , "Chemist" , "Programmer", "Scientist"];
 
   const lorem = 'Maecenas eget sem venenatis, tristique tortor vel, pharetra augue. Mauris ornare nec diam sit amet rhoncus. Aenean interdum justo elit, non malesuada lorem venenatis vitae. Curabitur nec neque sollicitudin, euismod turpis dignissim, finibus lectus. In hac habitasse platea dictumst. Aenean sit amet consequat justo. Integer eu enim nulla.  Sed ante lectus, tincidunt et convallis at, pretium et purus. Donec molestie porttitor tincidunt. Maecenas sollicitudin nulla in euismod tincidunt. Pellentesque turpis erat, consequat id lorem nec, tempor commodo turpis.'.split(' ');
 
@@ -49,10 +49,10 @@ function mockDescription (key) {
 }
 
 
-function hightLightTerm (term = {term:'' , info: []}) {
+function highLightTerm (term = {term:'' , info: []}) {
   //console.warn(">>" , term.term);
   let regex = new RegExp("( " + term.term + "[ |\.])" , 'ig');
-  let replacement = " <a  class='hightlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
+  let replacement = " <a  class='highlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
 
   $('p,span').each(function () {
     let html = $(this).html();
@@ -61,10 +61,10 @@ function hightLightTerm (term = {term:'' , info: []}) {
 
 }
 
-function hightLightTerms (terms) {
+function highLightTerms (terms) {
   terms.forEach(function (term) {
     // console.warn("> Term" , term);
-    hightLightTerm(term);
+    highLightTerm(term);
   });
 
 }
@@ -81,7 +81,7 @@ function generateMockTerm (term = "have") {
 ;
 var body = `
 
-<div  ng-app="myShoppingList" ng-controller="myCtrl" >
+<div  ng-app="dictionaryList" ng-controller="myCtrl" >
   <div class='tab-layout'>
     <div class='vertical-scrollable'>
       <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
@@ -142,7 +142,7 @@ function getResponseFromServer (content , $http) {
   return new Promise(function (resolve ,reject) {
 
     $.post('https://acsmp3b92j.execute-api.ap-southeast-1.amazonaws.com/prod', criteria , function (data) {
-      hightLightTerms(data);
+      highLightTerms(data);
 
       // mocking ugc
       var ugc = mockUGC(_.random(2,5)); // Using same ugc term
@@ -165,14 +165,14 @@ function getResponseFromServerMock () {
       var d = ['have', 'they', 'electron' , 'concentration'];
 
       var terms = d.map(function (word) { return generateMockTerm(word)});
-      hightLightTerms(terms);
+      highLightTerms(terms);
       resolve(terms);
     }, 200);
 
   });
 }
 
-var app = angular.module("myShoppingList", ['ngSanitize']);
+var app = angular.module("dictionaryList", ['ngSanitize']);
 app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
   $scope.terms = [];
@@ -241,7 +241,7 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
 function watchHighlight () {
 
-  $('body').on('click' , '.hightlight-box' , function (e) {
+  $('body').on('click' , '.highlight-box' , function (e) {
     e.preventDefault();
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -281,7 +281,7 @@ function watchHighlight () {
   // })
 
   $(window).click(function (e) {
-    if(e.target.className !== 'hightlight-box') {
+    if(e.target.className !== 'highlight-box') {
       fadeOutDiv();
     }
   });

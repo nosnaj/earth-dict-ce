@@ -1,7 +1,7 @@
 {
   "name": "earth-dict-ce",
   "version": "1.0.0",
-  "description": "",
+  "description": "Dictionary of Earth Chrome Extension",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

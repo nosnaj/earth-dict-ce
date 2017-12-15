@@ -1,6 +1,6 @@
 var body = `
 
-<div  ng-app="myShoppingList" ng-controller="myCtrl" >
+<div  ng-app="dictionaryList" ng-controller="myCtrl" >
   <div class='tab-layout'>
     <div class='vertical-scrollable'>
       <div class='header-1' data-meta-dic='title'>{{ getTitle() }}</div>
@@ -61,7 +61,7 @@ function getResponseFromServer (content , $http) {
   return new Promise(function (resolve ,reject) {
 
     $.post('https://acsmp3b92j.execute-api.ap-southeast-1.amazonaws.com/prod', criteria , function (data) {
-      hightLightTerms(data);
+      highLightTerms(data);
 
       // mocking ugc
       var ugc = mockUGC(_.random(2,5)); // Using same ugc term
@@ -84,14 +84,14 @@ function getResponseFromServerMock () {
       var d = ['have', 'they', 'electron' , 'concentration'];
 
       var terms = d.map(function (word) { return generateMockTerm(word)});
-      hightLightTerms(terms);
+      highLightTerms(terms);
       resolve(terms);
     }, 200);
 
   });
 }
 
-var app = angular.module("myShoppingList", ['ngSanitize']);
+var app = angular.module("dictionaryList", ['ngSanitize']);
 app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
   $scope.terms = [];
@@ -160,7 +160,7 @@ app.controller("myCtrl", ['$scope' , '$http' , function($scope, $http) {
 
 function watchHighlight () {
 
-  $('body').on('click' , '.hightlight-box' , function (e) {
+  $('body').on('click' , '.highlight-box' , function (e) {
     e.preventDefault();
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -200,7 +200,7 @@ function watchHighlight () {
   // })
 
   $(window).click(function (e) {
-    if(e.target.className !== 'hightlight-box') {
+    if(e.target.className !== 'highlight-box') {
       fadeOutDiv();
     }
   });

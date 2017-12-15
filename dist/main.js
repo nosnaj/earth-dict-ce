@@ -52,7 +52,7 @@ function mockDescription (key) {
 function highLightTerm (term = {term:'' , info: []}) {
   //console.warn(">>" , term.term);
   let regex = new RegExp("( " + term.term + "[ |\.])" , 'ig');
-  let replacement = " <a  class='highlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
+  let replacement = " <a  class='highlight-box' data-term='"+term.term+"'>$1</a> ";
 
   $('p,span').each(function () {
     let html = $(this).html();
@@ -89,34 +89,37 @@ var body = `
         <div data-meta-dic='description' ng-repeat='info in getDescriptions()'>
           <p class='wide-spacing' ng-bind-html='info.description'>
           </p>
-          <p class='source-name'>trusted source: {{info.source}}</p>
+          <p class='source-name extra-wide-spacing'>Trusted Source: {{info.source}}</p>
         </div>
       </section>
 
-      <div class='header-2'>Helpful illustration</div>
+      <div class='header-2'>Helpful Illustration</div>
       <section>
         <img class='helpful-illustration-doe' ng-if="getImage() === ''" src='https://ekoservis-praha.eu/static/images/noimg.jpg'></img>
         <img class='helpful-illustration-doe' ng-if="getImage() !== ''" ng-src='{{ getImage() }}' onerror="this.src='https://ekoservis-praha.eu/static/images/noimg.jpg'"></img>
       </section>
 
-      <div class='header-2'>Crowdsourced definitions/comments</div>
+      <div class='header-2'>Crowdsourced Definitions/Comments</div>
       <section>
           <section class='ugc-content-box' ng-repeat="ugc in getUGC()">
-            <div class='contributor'>{{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span></div>
-            <div data-meta-dic='description'>{{ugc.description}}</div>
-
-            <div class='likes'>
-              <span class='like-item'>
-                <a class='btn btn-link'>
-                  <img style='width: 15px; height: 15px' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQdFzUDZG5t/AAAAEF0RVh0Q29tbWVudABDUkVBVE9SOiBnZC1qcGVnIHYxLjAgKHVzaW5nIElKRyBKUEVHIHY4MCksIHF1YWxpdHkgPSA5MAp9VNrdAAACgUlEQVQ4y6WVTUsyURTHzzhq4PhCkQpBiabgLtxJhCKmm2jVKvwAbkQZXNfSjSKCblu4iL6Bi0rEhSC4EhEqF67Gt5BSx/FltPssbo+PZuo89d+dM//7u5zDOXcACdDDw4NGo6EoyuVyPT4+rrLBRlC1WoVF3d3d/ZAVi8UAgKZphNDt7S3G/ZB1eXlJEMT9/T0OrVYrABQKhWWnCDYpn8+TJGk0GnFoNpsBoNVqLTs3sOLxeLVa1Wg0er0eZxiGAQCKor5xr6kulUphz/PzM84Mh0OcGQwG/9Gver2OjyWTyVnS7/cDwMnJSaVSKRaLpVKJYZh1rI+Pj36/f3BwAABXV1ezfL/f1+l0X8pSKBTX19fYQCCEeJ5Pp9ODwQB/lkql4XA4m83abLZsNjs71ul0fD4fx3GzzGg0SqfTw+EwGo3SNA0IIYvFstxHvV4vZCWenp5IkjQYDBzHQa1Wk8vl85TDw8NIJMLzvBAWx3EGg2F3d/ft7Q0YhlEoFPOs8/NzJFitVksul+t0OpZlN8/qel1cXLAs63a7KYr6LctutwPA0dHR5rnfKJIkAWA8Hn/uxI/71ev1MOvl5UXQbq8Rz/PT6XRnZ8dkMv22xna7jUd/4Z0QiUS5XC4QCAgHIYSCwSAAeDyeBZZarT4+PnY4HAAgkUgE4kqlkkwm83q9n/Hr66tSqZx3iMXivb09r9dbLpdZll3V+PF4rFKptre3O53Ov3cikUisunl/f//s7Ozm5qbZbM6D3t/fnU4nAJyenn7z5vB/NZlMGo1GKBSyWCwqlWoeLZVKt7a2CILAoVarHY1Ggv4d0+m03W5nMhmPx/OlDxKJhKbpbrc77/8DnSxjSlY8/6gAAAAASUVORK5CYII=' >
-                </a>
-              </span>
-              <a class='btn btn-link'>
-                <span class="upvote-count like-item">
-                  {{ugc.upvote_count}}
+            <div class='contributor'>
+              <div>
+                {{ugc.user_name}} <span class='ugc-role'>&bull; {{ugc.user_role}}</span>
+              </div>
+              <div class='likes'>
+                <span class='like-item'>
+                  <a>
+                    <img style='width: 15px; height: 15px' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQdFzUDZG5t/AAAAEF0RVh0Q29tbWVudABDUkVBVE9SOiBnZC1qcGVnIHYxLjAgKHVzaW5nIElKRyBKUEVHIHY4MCksIHF1YWxpdHkgPSA5MAp9VNrdAAACgUlEQVQ4y6WVTUsyURTHzzhq4PhCkQpBiabgLtxJhCKmm2jVKvwAbkQZXNfSjSKCblu4iL6Bi0rEhSC4EhEqF67Gt5BSx/FltPssbo+PZuo89d+dM//7u5zDOXcACdDDw4NGo6EoyuVyPT4+rrLBRlC1WoVF3d3d/ZAVi8UAgKZphNDt7S3G/ZB1eXlJEMT9/T0OrVYrABQKhWWnCDYpn8+TJGk0GnFoNpsBoNVqLTs3sOLxeLVa1Wg0er0eZxiGAQCKor5xr6kulUphz/PzM84Mh0OcGQwG/9Gver2OjyWTyVnS7/cDwMnJSaVSKRaLpVKJYZh1rI+Pj36/f3BwAABXV1ezfL/f1+l0X8pSKBTX19fYQCCEeJ5Pp9ODwQB/lkql4XA4m83abLZsNjs71ul0fD4fx3GzzGg0SqfTw+EwGo3SNA0IIYvFstxHvV4vZCWenp5IkjQYDBzHQa1Wk8vl85TDw8NIJMLzvBAWx3EGg2F3d/ft7Q0YhlEoFPOs8/NzJFitVksul+t0OpZlN8/qel1cXLAs63a7KYr6LctutwPA0dHR5rnfKJIkAWA8Hn/uxI/71ev1MOvl5UXQbq8Rz/PT6XRnZ8dkMv22xna7jUd/4Z0QiUS5XC4QCAgHIYSCwSAAeDyeBZZarT4+PnY4HAAgkUgE4kqlkkwm83q9n/Hr66tSqZx3iMXivb09r9dbLpdZll3V+PF4rFKptre3O53Ov3cikUisunl/f//s7Ozm5qbZbM6D3t/fnU4nAJyenn7z5vB/NZlMGo1GKBSyWCwqlWoeLZVKt7a2CILAoVarHY1Ggv4d0+m03W5nMhmPx/OlDxKJhKbpbrc77/8DnSxjSlY8/6gAAAAASUVORK5CYII=' >
+                  </a>
                 </span>
-              </a>
+                <a>
+                  <span class="upvote-count like-item">
+                    {{ugc.upvote_count}}
+                  </span>
+                </a>
+              </div>
             </div>
+            <div data-meta-dic='description'>{{ugc.description}}</div>
           </section>
       </section>
     </div>

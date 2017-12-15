@@ -52,7 +52,7 @@ function mockDescription (key) {
 function highLightTerm (term = {term:'' , info: []}) {
   //console.warn(">>" , term.term);
   let regex = new RegExp("( " + term.term + "[ |\.])" , 'ig');
-  let replacement = " <a  class='highlight-box' data-term='"+term.term+"'>[ $1 ]</a> ";
+  let replacement = " <a  class='highlight-box' data-term='"+term.term+"'>$1</a> ";
 
   $('p,span').each(function () {
     let html = $(this).html();
